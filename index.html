@@ -1,0 +1,777 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="dist/output.css" rel="stylesheet">
+
+  <style>
+    /* Gaya default untuk gambar */
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    /* Gaya fullscreen */
+    .fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1000;
+      background-color: rgba(0, 0, 0, 0.8);
+      /* Background hitam semi-transparan */
+      transform: scale(1);
+      cursor: zoom-out;
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Cari semua elemen dengan class "clickable-image"
+      const images = document.querySelectorAll(".clickable-image");
+
+      // Tambahkan event listener untuk setiap elemen
+      images.forEach((img) => {
+        img.addEventListener("click", function () {
+          if (img.classList.contains("fullscreen")) {
+            // Jika sudah fullscreen, kembali ke ukuran semula
+            img.classList.remove("fullscreen");
+          } else {
+            // Jika belum fullscreen, tambahkan class fullscreen
+            img.classList.add("fullscreen");
+          }
+        });
+      });
+
+      // Event listener untuk tombol "Escape"
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          const fullscreenImg = document.querySelector(".fullscreen");
+          if (fullscreenImg) {
+            fullscreenImg.classList.remove("fullscreen");
+          }
+        }
+      });
+    });
+
+  </script>
+</head>
+
+<body class="bg-gray-200">
+  <span
+    class="text-tertiary absolute flex -translate-y-full transform space-x-1 border-b border-gray-150 bg-white p-2 focus-within:relative focus-within:translate-y-0 dark:border-gray-800 dark:bg-gray-900"><a
+      class="text-primary font-semibold" href="#main">Skip to content</a><span>(if
+      available)</span><span>or</span><a class="text-primary font-semibold" href="#list">jump to list</a><span>(if
+      available)</span>
+  </span>
+  <div style="position:fixed;z-index:9999;top:16px;left:16px;right:16px;bottom:16px;pointer-events:none" class="">
+  </div>
+  <div class="relative flex h-full min-h-screen w-full">
+    <div id="overlay" class="fixed inset-0 z-20 hidden lg:hidden" style="background-color: rgba(41, 41, 42, 0.771);">
+    </div>
+    <nav id="sidebar"
+      class="absolute -translate-x-full 3xl:w-80 z-30 flex h-full max-h-screen min-h-screen w-3/4 flex-none transform flex-col overflow-y-auto border-r border-gray-150 bg-gray-800 pb-10 transition duration-200 ease-in-out dark:border-gray-800 dark:bg-gray-900 sm:w-1/2 sm:pb-0 md:w-1/3 lg:relative lg:z-auto lg:w-56 lg:translate-x-0 lg:bg-gray-800 lg:dark:bg-gray-900 2xl:w-72">
+      <span id="menu-toggle-close"
+        class="flex items-center justify-left p-2 rounded-md cursor-pointer text-white hover:bg-gray-200 dark:hover:bg-gray-800 lg:hidden"><svg
+          xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="text-primary">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </span>
+      <div
+        class="filter-blur sticky top-0 z-10 flex flex-col justify-center px-3 py-2 dark:border-b dark:border-gray-900 my-4"
+        style="background: rgba(255, 255, 255, 0); box-shadow: rgba(0, 0, 0, 0) 0px 1px 3px;">
+        <div class="flex justify-center text-white">
+          <span class="flex flex-col items-center justify-center space-x-3">
+            <img src="img/logo_smarteducation.png" class="img-fluid" alt="" height="90" width="90">
+            <h2 class="text-sm font-bold text-primary transform-gpu line-clamp-1 pt-2">SmartEducation.ID</h2>
+          </span>
+        </div>
+      </div>
+      <!-- <hr> -->
+      <div class="flex-1 px-3 py-3 space-y-1">
+        <p class="text-white my-4">Data Panduan</p>
+        <ul id="parent-tab" class="space-y-1">
+          <span class="py-2 flex items-center">
+            <svg width="16" height="16" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M4 11h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm10 0h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zM4 21h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm10 0h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1z">
+                </path>
+              </g>
+            </svg>
+            <h4 class="px-2 text-xs text-white">
+              Customer</h4>
+          </span>
+          <li id="tab-qna" class="flex items-stretch space-x-1 rounded-lg" onclick="triggerTab('qna', 'parent-tab')">
+            <a
+              class="flex flex-1 items-center space-x-3 rounded-md pl-6 pr-2 py-1.5 text-sm font-medium justify-between">
+              <span class="flex-1">Q&A</span>
+              <span class="flex items-center justify-center w-4">
+                <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path d="M18 6h2v12h-2zm-8 5H4v2h6v5l6-6-6-6z"></path>
+                  </g>
+                </svg>
+              </span>
+            </a>
+          </li>
+          <li id="tab-pendaftaran" class="flex items-stretch space-x-1 rounded-lg"
+            onclick="triggerTab('pendaftaran', 'parent-tab')">
+            <a
+              class="flex flex-1 items-center space-x-3 rounded-md pl-6 pr-2 py-1.5 text-sm font-medium justify-between">
+              <span class="flex-1">Pendaftaran</span>
+              <span class="flex items-center justify-center w-4">
+                <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path d="M18 6h2v12h-2zm-8 5H4v2h6v5l6-6-6-6z"></path>
+                  </g>
+                </svg>
+              </span>
+            </a>
+          </li>
+          <!-- <span class="py-2 flex items-center">
+            <svg width="16" height="16" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M4 11h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm10 0h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zM4 21h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm10 0h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1z">
+                </path>
+              </g>
+            </svg>
+            <h4 class="px-2 text-xs text-white">
+              Akses</h4>
+          </span> -->
+          <span class="py-2 flex items-center">
+            <svg width="16" height="16" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M4 11h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm10 0h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zM4 21h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm10 0h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1z">
+                </path>
+              </g>
+            </svg>
+            <h4 class="px-2 text-xs text-white">
+              Pengelolaan</h4>
+          </span>
+          <li id="tab-masuk" class="flex items-stretch space-x-1 rounded-lg"
+            onclick="triggerTab('masuk', 'parent-tab')">
+            <a
+              class="flex flex-1 items-center space-x-3 rounded-md pl-6 pr-2 py-1.5 text-sm font-medium justify-between">
+              <span class="flex-1">Masuk</span>
+              <span class="flex items-center justify-center w-4">
+                <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path d="M18 6h2v12h-2zm-8 5H4v2h6v5l6-6-6-6z"></path>
+                  </g>
+                </svg>
+              </span>
+            </a>
+          </li>
+          <li id="tab-keluar" class="flex items-stretch space-x-1 rounded-lg"
+            onclick="triggerTab('keluar', 'parent-tab')">
+            <a
+              class="flex flex-1 items-center space-x-3 rounded-md pl-6 pr-2 py-1.5 text-sm font-medium justify-between">
+              <span class="flex-1">Keluar</span>
+              <span class="flex items-center justify-center w-4">
+                <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path d="M18 6h2v12h-2zm-8 5H4v2h6v5l6-6-6-6z"></path>
+                  </g>
+                </svg>
+              </span>
+            </a>
+          </li>
+          <li id="tab-transaksi" class="flex items-stretch space-x-1 rounded-lg"
+            onclick="triggerTab('transaksi', 'parent-tab')">
+            <a
+              class="flex flex-1 items-center space-x-3 rounded-md pl-6 pr-2 py-1.5 text-sm font-medium justify-between">
+              <span class="flex-1">Transaksi</span>
+              <span class="flex items-center justify-center w-4">
+                <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path d="M18 6h2v12h-2zm-8 5H4v2h6v5l6-6-6-6z"></path>
+                  </g>
+                </svg>
+              </span>
+            </a>
+          </li>
+          <li id="tab-pertanyaan" class="flex items-stretch space-x-1 rounded-lg"
+            onclick="triggerTab('pertanyaan', 'parent-tab')">
+            <a
+              class="flex flex-1 items-center space-x-3 rounded-md pl-6 pr-2 py-1.5 text-sm font-medium justify-between">
+              <span class="flex-1">Pertanyaan</span>
+              <span class="flex items-center justify-center w-4">
+                <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path d="M18 6h2v12h-2zm-8 5H4v2h6v5l6-6-6-6z"></path>
+                  </g>
+                </svg>
+              </span>
+            </a>
+          </li>
+          <li id="tab-clabil" class="flex items-stretch space-x-1 rounded-lg"
+            onclick="triggerTab('clabil', 'parent-tab')">
+            <a
+              class="flex flex-1 items-center space-x-3 rounded-md pl-6 pr-2 py-1.5 text-sm font-medium justify-between">
+              <span class="flex-1">Customer labil</span>
+              <span class="flex items-center justify-center w-4">
+                <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path d="M18 6h2v12h-2zm-8 5H4v2h6v5l6-6-6-6z"></path>
+                  </g>
+                </svg>
+              </span>
+            </a>
+          </li>
+          <li id="tab-user" class="flex items-stretch space-x-1 rounded-lg" onclick="triggerTab('user', 'parent-tab')">
+            <a
+              class="flex flex-1 items-center space-x-3 rounded-md pl-6 pr-2 py-1.5 text-sm font-medium justify-between">
+              <span class="flex-1">User</span>
+              <span class="flex items-center justify-center w-4">
+                <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path d="M18 6h2v12h-2zm-8 5H4v2h6v5l6-6-6-6z"></path>
+                  </g>
+                </svg>
+              </span>
+            </a>
+          </li>
+          <li id="tab-customer" class="flex items-stretch space-x-1 rounded-lg"
+            onclick="triggerTab('customer', 'parent-tab')">
+            <a
+              class="flex flex-1 items-center space-x-3 rounded-md pl-6 pr-2 py-1.5 text-sm font-medium justify-between">
+              <span class="flex-1">Pengguna / Customer</span>
+              <span class="flex items-center justify-center w-4">
+                <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path d="M18 6h2v12h-2zm-8 5H4v2h6v5l6-6-6-6z"></path>
+                  </g>
+                </svg>
+              </span>
+            </a>
+          </li>
+          <span class="py-2 flex items-center">
+            <svg width="16" height="16" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M4 11h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm10 0h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zM4 21h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm10 0h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1z">
+                </path>
+              </g>
+            </svg>
+            <h4 class="px-2 text-xs text-white">
+              Profil</h4>
+          </span>
+          <li id="tab-kp" class="flex items-stretch space-x-1 rounded-lg" onclick="triggerTab('kp', 'parent-tab')">
+            <a
+              class="flex flex-1 items-center space-x-3 rounded-md pl-6 pr-2 py-1.5 text-sm font-medium justify-between">
+              <span class="flex-1">Kontak Person</span>
+              <span class="flex items-center justify-center w-4">
+                <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path d="M18 6h2v12h-2zm-8 5H4v2h6v5l6-6-6-6z"></path>
+                  </g>
+                </svg>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div
+      class="fixed inset-0 z-20 bg-black bg-opacity-10 transition duration-200 ease-in-out dark:bg-opacity-50 pointer-events-none opacity-0">
+    </div>
+    <div class="flex flex-1">
+      <div class="flex flex-col md:flex-row w-full">
+        <div class="relative flex max-h-screen w-full flex-col overflow-y-auto bg-gray-200 dark:bg-black"
+          data-cy="home-intro">
+          <div class="flex justify-between bg-white w-full items-center">
+            <div class="flex items-center">
+              <div class="pl-3 text-sm">Website Panduan</div>
+              <div
+                class="filter-blur sticky top-0 z-10 flex flex-col justify-center px-3 py-2 dark:border-b dark:border-gray-900 shadow-sm">
+                <div class="flex items-center justify-between flex-none">
+                  <span class="flex items-center space-x-3">
+                    <span id="menu-toggle"
+                      class="flex items-center justify-center p-2 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 lg:hidden"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="text-primary">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                      </svg></span>
+                    <h2 class="text-sm font-bold text-primary transform-gpu line-clamp-1"
+                      style="transform: translateY(200%); opacity: 0;">Home</h2>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="clock mr-3 font-bold text-sm" id="realtime-clock">Loading...</div>
+          </div>
+          <div class="p-4"></div>
+          <div class="mx-auto w-full px-4 pb-10 md:px-8">
+            <div class="">
+              <div id="qna" class="hidden">
+                <section class="mx-auto bg-white p-6 rounded-lg">
+                  <h3 class="text-2xl font-semibold text-gray-900">Q&A</h3>
+                  <hr class="my-3">
+                  <p class="text-gray-600 py-1">Q&A singkat untuk Customer:</p>
+                  <ul class="list-decimal pl-5 text-gray-600 space-y-1">
+                    <li>Scroll pada menu Q&A.</li>
+                    <li>Cek data Q&A yang tertera mengenai apa saja yang umumnya ditanyakan.</li>
+                    <div class="w-full lg:w-1/2 md:w-1/2">
+                      <img
+                        class="border-2 border-gray-600 transition-transform duration-300 ease-in-out cursor-pointer clickable-image"
+                        src="img/pendaftaran/SmartEducation-Layanan-Digitalisasi-Sekolah-12-13-2024_08_35_AM.png"
+                        alt="">
+                    </div>
+                  </ul>
+                </section>
+              </div>
+              <div id="pendaftaran" class="hidden">
+                <section class="mx-auto bg-white p-6 rounded-lg">
+                  <h3 class="text-2xl font-semibold text-gray-900">Pendafataran</h3>
+                  <hr class="my-3">
+                  <p class="text-gray-600 py-1">Petunjuk Pendafataran Customer</p>
+                  <ul class="list-decimal pl-5 space-y-1">
+                    <li>Kunjungi halaman <button class="text-blue-600 hover:text-blue-800"
+                        onclick="link1()">https://smarteducation.id/</button></li>
+                    <li>Pilih opsi paket</li>
+                    <div class="w-full lg:w-1/2 md:w-1/2">
+                      <img
+                        class="border-2 border-gray-600 transition-transform duration-300 ease-in-out cursor-pointer clickable-image"
+                        src="img/pendaftaran/SmartEducation-Layanan-Digitalisasi-Sekolah-12-12-2024_10_08_AM.png"
+                        alt="">
+                    </div>
+                    <li>Pilih domain</li>
+                    <p class="text-sm text-gray-600">Pilih nama domain yang unik dan mudah diingat untuk identitas
+                      website</p>
+                    <p class="text-sm text-gray-600">Atau jika sudah punya domain sendiri, bisa dituliskan untuk
+                      digunakan</p>
+                    <div class="w-full lg:w-1/2 md:w-1/2">
+                      <img
+                        class="border-2 border-gray-600 transition-transform duration-300 ease-in-out cursor-pointer clickable-image"
+                        src="img/pendaftaran/SmartEducation-Regristasi-Pembelian-Paket-12-12-2024_10_16_AM.png"
+                        alt="">
+                    </div>
+                    <li>Isi formulir data</li>
+                    <p class="text-sm text-gray-600">Lengkapi formulir data diri dan informasi sekolah untuk website
+                      dengan benar</p>
+                    <div class="w-full lg:w-1/2 md:w-1/2">
+                      <img
+                        class="border-2 border-gray-600 transition-transform duration-300 ease-in-out cursor-pointer clickable-image"
+                        src="img/pendaftaran/SmartEducation-Regristasi-Pembelian-Paket-12-12-2024_10_17_AM.png"
+                        alt="">
+                    </div>
+                    <li>Pilih tema pada website profil</li>
+                    <p class="text-sm text-gray-600">Pilih tema desain yang sesuai dengan gaya dan preferensi Anda dari
+                      berbagai pilihan tema yang tersedia</p>
+                    <div class="w-full lg:w-1/2 md:w-1/2">
+                      <img
+                        class="border-2 border-gray-600 transition-transform duration-300 ease-in-out cursor-pointer clickable-image"
+                        src="img/pendaftaran/SmartEducation-Regristasi-Pembelian-Paket-12-12-2024_10_170_AM.png"
+                        alt="">
+                    </div>
+                    <li>Selesaikan Transaksi</li>
+                    <p class="text-sm text-gray-600">Pilih pembayaran sesuai dengan paket yang Anda pilih</p>
+                    <div class="w-full lg:w-1/2 md:w-1/2">
+                      <img
+                        class="border-2 border-gray-600 transition-transform duration-300 ease-in-out cursor-pointer clickable-image"
+                        src="img/pendaftaran/SmartEducation-Regristasi-Pembelian-Paket-12-12-2024_10_18_AM.png"
+                        alt="">
+                    </div>
+                    <li>Simpan atau cetak invoice</li>
+                    <p class="text-sm text-gray-600">Simpan bukti pembayaran Anda untuk arsip</p>
+                    <div class="w-full lg:w-1/2 md:w-1/2">
+                      <img
+                        class="border-2 border-gray-600 transition-transform duration-300 ease-in-out cursor-pointer clickable-image"
+                        src="img/pendaftaran/Regristasi-Pembelian-Paket-12-12-2024_10_19_AM.png" alt="">
+                    </div>
+                    <li>Hubungi admin untuk tahap selanjutnya</li>
+                    <p class="text-sm text-gray-600">Melalui nomor atau email yang tertera pada dashboard depan</p>
+                  </ul>
+                </section>
+              </div>
+              <div id="masuk" class="hidden">
+                <section class="mx-auto bg-white p-6 rounded-lg">
+                  <h3 class="text-2xl font-semibold text-gray-900">Akses Masuk</h3>
+                  <hr class="my-3">
+                  <p class="text-gray-600 py-1">Petunjuk masuk untuk Pengelola:</p>
+                  <ul class="list-decimal pl-5 text-gray-600 space-y-1">
+                    <li>Kunjungi halaman <button class="text-blue-600 hover:text-blue-800"
+                        onclick="link1()">https://smarteducation.id/login</button></li>
+                    <li>Masukkan kata sandi yang telah Anda buat.</li>
+                    <li>Masukkan username atau email Anda.</li>
+                    <div class="w-full lg:w-1/2 md:w-1/2">
+                      <img
+                        class="border-2 border-gray-600 transition-transform duration-300 ease-in-out cursor-pointer clickable-image"
+                        src="img/pendaftaran/Log-In-visidatateknologi-com-12-12-2024_10_20_AM.png" alt="">
+                    </div>
+                    <li>Klik tombol "Masuk" untuk mengakses aplikasi.</li>
+                  </ul>
+                </section>
+              </div>
+              <div id="keluar" class="hidden">
+                <section class="mx-auto bg-white p-6 rounded-lg">
+                  <h3 class="text-2xl font-semibold text-gray-900">Akses Keluar</h3>
+                  <hr class="my-3">
+                  <p class="text-gray-600 py-1">Petunjuk keluar untuk Pengelola:</p>
+                  <ul class="list-decimal pl-5 text-gray-600 space-y-1">
+                    <li>Pilih Logout pada sidebar dashboard admin.</li>
+                    <div class="w-full lg:w-1/2 md:w-1/2">
+                      <img
+                        class="border-2 border-gray-600 transition-transform duration-300 ease-in-out cursor-pointer clickable-image"
+                        src="img/pendaftaran/logout.jpg" alt="">
+                    </div>
+                  </ul>
+                </section>
+              </div>
+              <div id="transaksi" class="hidden">
+                <section class="mx-auto bg-white p-6 rounded-lg">
+                  <h3 class="text-2xl font-semibold text-gray-900">Transaksi</h3>
+                  <hr class="my-3">
+                  <p class="text-gray-600 py-1">Petunjuk transaksi untuk pengelola:</p>
+                  <ul class="list-decimal pl-5 text-gray-600 space-y-1">
+                    <li>Pilih Tab Transaksi pada sidebar dashboard admin.</li>
+                    <div class="w-full lg:w-1/2 md:w-1/2">
+                      <img
+                        class="border-2 border-gray-600 transition-transform duration-300 ease-in-out cursor-pointer clickable-image"
+                        src="img/pendaftaran/Dashboard-visidatateknologi-com-12-13-2024_08_53_PM.png"
+                        alt="Dashboard Screenshot">
+                    </div>
+                    <li>Cek Nota untuk dibagikan ke customer terkait pendaftaran melalui kontak atau email.</li>
+                    <div class="w-full lg:w-1/2 md:w-1/2">
+                      <img
+                        class="border-2 border-gray-600 transition-transform duration-300 ease-in-out cursor-pointer clickable-image"
+                        src="img/pendaftaran/Dashboard-visidatateknologi-com-12-13-2024_08_531_PM.png" alt="">
+                    </div>
+                    <li>Unggah data-data yang diperlukan ke sistem oleh admin.</li>
+                    <div class="w-full lg:w-1/2 md:w-1/2">
+                      <img
+                        class="border-2 border-gray-600 transition-transform duration-300 ease-in-out cursor-pointer clickable-image"
+                        src="img/pendaftaran/Dashboard-visidatateknologi-com-12-13-2024_08_54_PM.png" alt="">
+                    </div>
+                    <li>Aktivasi status web ketika domain dan website, serta aplikasi portal mobile sudah siap.</li>
+                    <div class="w-full lg:w-1/2 md:w-1/2">
+                      <img
+                        class="border-2 border-gray-600 transition-transform duration-300 ease-in-out cursor-pointer clickable-image"
+                        src="img/pendaftaran/Dashboard-visidatateknologi-com-12-13-2024_08_55_PM.png" alt="">
+                    </div>
+                  </ul>
+                </section>
+              </div>
+              <div id="pertanyaan" class="hidden">
+                <section class="mx-auto bg-white p-6 rounded-lg">
+                  <h3 class="text-2xl font-semibold text-gray-900">Pertanyaan</h3>
+                  <hr class="my-3">
+                  <p class="text-gray-600 py-1">Petunjuk data pertanyaan dari customer untuk pengelola:</p>
+                  <ul class="list-decimal pl-5 text-gray-600 space-y-1">
+                    <li>Scroll pada menu pengajuan pertanyaan.</li>
+                    <div class="w-full lg:w-1/2 md:w-1/2">
+                      <img
+                        class="border-2 border-gray-600 transition-transform duration-300 ease-in-out cursor-pointer clickable-image"
+                        src="img/pendaftaran/SmartEducation-Layanan-Digitalisasi-Sekolah-12-13-2024_06_53_PM.png"
+                        alt="">
+                    </div>
+                    <li>Cek data pertanyaan yang diajukan pada sidebar pertanyaan pada dashboard Pengelola.</li>
+                    <div class="w-full lg:w-1/2 md:w-1/2">
+                      <img
+                        class="border-2 border-gray-600 transition-transform duration-300 ease-in-out cursor-pointer clickable-image"
+                        src="img/pendaftaran/Dashboard-visidatateknologi-com-12-13-2024_08_32_PM.png" alt="">
+                    </div>
+                    <li>Untuk membalas pertanyaan, pengelola melalui email smarteducation maupun kontak.</li>
+                  </ul>
+                </section>
+              </div>
+              <div id="clabil" class="hidden">
+                <section class="mx-auto bg-white p-6 rounded-lg">
+                  <h3 class="text-2xl font-semibold text-gray-900">Customer labil</h3>
+                  <hr class="my-3">
+                  <p class="text-gray-600 py-1">Petunjuk data customer labil untuk pengelola:</p>
+                  <ul class="list-decimal pl-5 text-gray-600 space-y-1">
+                    <li>Cek data customer yang belum menlanjutkan transaksi yang diajukan pada sidebar customer labil
+                      pada dashboard pengelola.</li>
+                    <div class="w-full lg:w-1/2 md:w-1/2">
+                      <img
+                        class="border-2 border-gray-600 transition-transform duration-300 ease-in-out cursor-pointer clickable-image"
+                        src="img/pendaftaran/Dashboard-visidatateknologi-com-12-13-2024_08_35_PM.png" alt="">
+                    </div>
+                    <li>Untuk menghubungi customer yang labil, pengelola melalui email smarteducation maupun kontak.
+                    </li>
+                  </ul>
+                </section>
+              </div>
+              <div id="kp" class="hidden">
+                <section class="mx-auto bg-white p-6 rounded-lg">
+                  <h3 class="text-2xl font-semibold text-gray-900">Profil perusahaan</h3>
+                  <hr class="my-3">
+                  <p class="text-gray-600 py-1">Petunjuk data profil perusahaan yang tertera:</p>
+                  <ul class="list-decimal pl-5 text-gray-600 space-y-1">
+                    <li>Email: admin@smarteducation.id.</li>
+                    <li>Nomor Telepon: 0812-7355-7000.</li>
+                    <li>Alamat: Sumber Bendo, Sumbertebu,
+                      Kec. Bangsal, Kabupaten Mojokerto,
+                      Jawa Timur.</li>
+                    <li>Lokasi Lat: -7.501147955531967.</li>
+                    <li>Lokasi Lon: 112.4976078220907.</li>
+                  </ul>
+                </section>
+              </div>
+              <div id="user" class="hidden">
+                <section class="mx-auto bg-white p-6 rounded-lg">
+                  <h3 class="text-2xl font-semibold text-gray-900">Data User</h3>
+                  <hr class="my-3">
+                  <p class="text-gray-600 py-1">Petunjuk data user yang mendaftar:</p>
+                  <ul class="list-decimal pl-5 text-gray-600 space-y-1">
+                    <li>Cek data semua user yang terdaftar pada aplikasi.</li>
+                    <div class="w-full lg:w-1/2 md:w-1/2">
+                      <img
+                        class="border-2 border-gray-600 transition-transform duration-300 ease-in-out cursor-pointer clickable-image"
+                        src="img/pendaftaran/Dashboard-visidatateknologi-com-12-13-2024_08_47_PM.png" alt="">
+                    </div>
+                    <li>Cek data semua user pengguna / operator sekolah.</li>
+                    <div class="w-full lg:w-1/2 md:w-1/2">
+                      <img
+                        class="border-2 border-gray-600 transition-transform duration-300 ease-in-out cursor-pointer clickable-image"
+                        src="img/pendaftaran/Dashboard-visidatateknologi-com-12-13-2024_08_46_PM.png" alt="">
+                    </div>
+                  </ul>
+                </section>
+              </div>
+              <div id="customer" class="hidden">
+                <section class="mx-auto bg-white p-6 rounded-lg">
+                  <h3 class="text-2xl font-semibold text-gray-900">Data Customer</h3>
+                  <hr class="my-3">
+                  <p class="text-gray-600 py-1">Petunjuk data profil yang mendaftar:</p>
+                  <ul class="list-decimal pl-5 text-gray-600 space-y-1">
+                    <li>Cek data semua profil pengguna / operator sekolah yang terdaftar.</li>
+                    <div class="w-full lg:w-1/2 md:w-1/2">
+                      <img
+                        class="border-2 border-gray-600 transition-transform duration-300 ease-in-out cursor-pointer clickable-image"
+                        src="img/pendaftaran/Dashboard-visidatateknologi-com-12-13-2024_08_49_PM.png" alt="">
+                    </div>
+                  </ul>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Fungsi untuk mengatur tab aktif
+    function triggerTab(value, value2) {
+      // alert(value)
+      // Sembunyikan semua konten
+      document.getElementById("pendaftaran").classList.add('hidden');
+      document.getElementById("masuk").classList.add('hidden');
+      document.getElementById("keluar").classList.add('hidden');
+      document.getElementById("transaksi").classList.add('hidden');
+      document.getElementById("pertanyaan").classList.add('hidden');
+      document.getElementById("clabil").classList.add('hidden');
+      document.getElementById("qna").classList.add('hidden');
+      document.getElementById("kp").classList.add('hidden');
+      document.getElementById("user").classList.add('hidden');
+      document.getElementById("customer").classList.add('hidden');
+
+      // Tampilkan konten berdasarkan tab yang diklik
+      if (value) {
+        console.log(document.getElementById(value))
+        document.getElementById(value).classList.remove('hidden');
+
+        // Simpan tab aktif di localStorage
+        localStorage.setItem('activeTab', value);
+
+        // Atur gaya tab aktif
+        updateActiveTab(value, value2);
+        return;
+      }
+
+      alert('value tidak ada');
+    }
+
+    // Fungsi untuk memperbarui gaya tab aktif
+    function updateActiveTab(activeTab, tabGroup) {
+      const tabs = document.querySelectorAll(`#${tabGroup} li`);
+      // console.log(tabGroup);
+      // console.log(activeTab);
+      // console.log(tabs);
+      tabs.forEach(tab => {
+        const link = tab.querySelector('a');
+        if (tab.id === `tab-${activeTab}`) {
+          // alert(`${tab.id} aktif`)
+          tab.classList.add('text-gray-200', 'bg-gray-700');
+          tab.classList.remove('text-gray-400', 'bg-white');
+          if (link) {
+            link.classList.remove('bg-gray-800');
+            link.classList.add('hover:bg-gray-600');
+          }
+        } else {
+          // alert(`${tab.id} tidak aktif`)
+          tab.classList.remove('text-gray-200', 'bg-gray-700');
+          tab.classList.add('text-gray-400', 'bg-white');
+          if (link) {
+            link.classList.add('bg-gray-800');
+            link.classList.add('hover:bg-gray-600');
+          }
+        }
+      });
+    }
+
+    // Terapkan tab aktif saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', () => {
+      const activeTab = localStorage.getItem('activeTab') || 'pendaftaran';
+      // alert(activeTab);
+      triggerTab(activeTab, 'parent-tab');
+    });
+  </script>
+
+  <script>
+    // Function to toggle sidebar visibility
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('-translate-x-full');
+    }
+
+    // Function to toggle submenu visibility
+    function toggleSubmenu(menuId) {
+      // alert(menuId)
+      const submenu = document.getElementById(`submenu-${menuId}`);
+      const icon = document.getElementById(`icon-${menuId}`);
+
+      // Toggle visibility of submenu
+      submenu.classList.toggle('hidden');
+
+      // Rotate the icon
+      icon.classList.toggle('rotate-180'); // Use 'rotate-180' for 180° rotation
+    }
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuToggle = document.getElementById("menu-toggle");
+      const menuToggleClose = document.getElementById("menu-toggle-close");
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("overlay");
+
+      function toggleSidebar(show) {
+        if (show) {
+          sidebar.classList.remove("-translate-x-full");
+          sidebar.classList.add("translate-x-0");
+          overlay.classList.remove("hidden");
+        } else {
+          sidebar.classList.remove("translate-x-0");
+          sidebar.classList.add("-translate-x-full");
+          overlay.classList.add("hidden");
+        }
+      }
+
+      menuToggle.addEventListener("click", () => toggleSidebar(true));
+      menuToggleClose.addEventListener("click", () => toggleSidebar(false));
+      overlay.addEventListener("click", () => toggleSidebar(false));
+    });
+  </script>
+
+  <script>
+    // Fungsi untuk memperbarui waktu
+    function updateClock() {
+      const clockElement = document.getElementById('realtime-clock');
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0'); // Tambahkan leading zero
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+
+      clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    // Memperbarui waktu setiap detik
+    setInterval(updateClock, 1000);
+
+    // Inisialisasi clock pada saat halaman dimuat
+    updateClock();
+  </script>
+
+  <script>
+    // Script untuk membuka dan menutup modal
+    function openModal() {
+      const modal = document.getElementById('modalData');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex', 'opacity-100');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('modalData');
+      modal.classList.add('hidden', 'opacity-0');
+      modal.classList.remove('flex', 'opacity-100');
+    }
+  </script>
+
+  <script>
+    // Fungsi untuk menyisipkan konten dari file HTML lain
+    function includeHTML(targetId, filePath) {
+      fetch(filePath)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Failed to load ${filePath}: ${response.statusText}`);
+          }
+          return response.text();
+        })
+        .then(data => {
+          document.getElementById(targetId).innerHTML = data;
+        })
+        .catch(error => {
+          console.error(error);
+          document.getElementById(targetId).innerHTML = `<p>Error loading ${filePath}</p>`;
+        });
+    }
+
+    // Panggil fungsi untuk mengisi konten
+    // includeHTML('header', 'header.html');
+    // includeHTML('content', 'content.html');
+    // includeHTML('footer', 'footer.html');
+  </script>
+
+  <script>
+    function link1() {
+      window.location.href = "https://smarteducation.id/"
+    }
+  </script>
+
+</body>
+
+</html>
